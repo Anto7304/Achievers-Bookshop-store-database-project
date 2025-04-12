@@ -46,3 +46,41 @@ CREATE TABLE book_author (
     FOREIGN KEY (book_id) REFERENCES book(book_id),
     FOREIGN KEY (author_id) REFERENCES author(author_id)
 );
+
+-- shipping|_method table
+CREATE TABLE shipping_method(
+shippingMethod_ID INT PRIMARY KEY AUTO_INCREMENT,
+MethodName VARCHAR(20),
+Cost DECIMAL(6,2),
+Delivery_time DATETIME NOT NULL
+);
+
+-- order_status table
+CREATE TABLE order_status(
+status_ID INT PRIMARY KEY AUTO_INCREMENT,
+status VARCHAR(10)
+);
+
+-- cust_order table
+CREATE TABLE           (
+Order_ID INT PRIMARY KEY AUTO_INCREMENT,
+OrderDate ADDDATE(date,day) NOT NULL,
+customer_ID INT,
+shippingMethod_ID INT,
+Total_order INT NOT NULL,
+address_id INT,
+CHECK Total_order>=0,
+FOREIGN KEY customer_ID REFERENCE customer(customer_ID),
+FOREIGN KEY shippingMethod_ID REFERENCE shipping_method(shippingMethod_ID)
+FOREIGN KEY address_id REFERENCE address(address_id)
+);
+
+
+-- order_history table
+CREATE TABLE order_history(
+OrderHistory_ID INT PRIMARY KEY AUTO_INCREMENT,
+Order_ID INT,
+status_ID INT,
+FOREIGN KEY Order_ID REFERENCE cust_order(Order_ID),
+FOREIGN KEY status_ID REFERENCE order_status(status_ID)
+);
