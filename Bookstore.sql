@@ -43,7 +43,48 @@ CREATE TABLE book_author (
     FOREIGN KEY (book_id) REFERENCES book(book_id),
     FOREIGN KEY (author_id) REFERENCES author(author_id)
 );
- 
+ --create table of address Status
+ CREATE TABLE addressStatus(
+addressStatusId INT auto_increment PRIMARY KEY,
+statusName VARCHAR(60) NOT NULL
+);
+
+--create table of country
+CREATE TABLE country(
+countryId INT auto_increment PRIMARY KEY,
+countryName VARCHAR(100)
+);
+
+--create table of address
+CREATE TABLE address(
+addressId INT auto_increment PRIMARY KEY,
+street VARCHAR(250),
+city VARCHAR(100),
+state VARCHAR(100),
+postalCode VARCHAR(50),
+countryID INT REFERENCES country(countryId)
+);
+
+--table for customer
+CREATE TABLE customer(
+customerId INT auto_increment PRIMARY KEY,
+firstName VARCHAR(150) NOT NULL,
+lastName VARCHAR(150) NOT NULL,
+email VARCHAR(200) UNIQUE,
+phone VARCHAR(30)
+);
+
+--create table of customeraddress
+CREATE TABLE customerAddress(
+customerId INT,
+addressId INT,
+addressStatusId INT,
+PRIMARY KEY (customerId, addressId ,addressStatusId),
+FOREIGN KEY(customerId) REFERENCES customer(customerId),
+FOREIGN KEY(addressId) REFERENCES address(addressId),
+FOREIGN KEY(addressStatusId) REFERENCES addressStatus(addressStatusId)
+);
+
  USE bookstoredb;
 -- shipping|_method table
 CREATE TABLE shipping_method(
