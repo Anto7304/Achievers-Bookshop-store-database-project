@@ -134,20 +134,6 @@ CREATE TABLE order_history (
 );
 
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-=======
 USE  bookstoredb;
 
 -- Insert values into Book Language table
@@ -340,4 +326,36 @@ VALUES
 (108,2),
 (110,5)
 ;
->>>>>>> 30be3f25234bc62f9a8efaca3fee521493a2a97e
+
+
+-- CREATING ROLES
+CREATE ROLE manager, cashier, admin;
+
+
+-- ASSIGNING PERMISSION
+GRANT ALL ON  bookstoredb.* TO Charity@localhost;
+
+GRANT SELECT, UPDATE, INSERT ON bookstoredb.* TO Alex'@'localhost;
+
+GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON bookstoredb.* TO Anthony'@'localhost;
+
+-- CREATING USER
+CREATE USER 'Charity'@'localhost' 
+IDENTIFIED BY '1234';
+
+CREATE USER 'Alex'@'localhost' 
+IDENTIFIED BY '1234';
+
+CREATE USER 'Anthony'@'localhost' 
+IDENTIFIED BY '1234';
+
+-- GRANTING PREVILEGES 
+GRANT admin TO Charity@localhost;
+GRANT cashier TO Alex@localhost;
+GRANT manager TO Anthony@localhost;
+
+GRANT ALL ON  bookstoredb.* TO Charity@localhost;
+
+GRANT SELECT, UPDATE, INSERT ON bookstoredb.* TO Alex@localhost;
+
+GRANT SELECT, INSERT, UPDATE, DELETE, DROP ON bookstoredb.* TO Anthony@localhost;
